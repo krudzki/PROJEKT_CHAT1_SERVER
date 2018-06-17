@@ -116,9 +116,37 @@ namespace PROJEKT_CHAT1_SERVER
                         byte[] sendBytes = Encoding.UTF8.GetBytes($"{pointClient}: {str}");
                         s.Send(sendBytes);
                     }
+                }
+                catch (SocketException ex)
+                {
+                    clientSockets.Remove(pointClient);
+                    mainForm.UserListRemoveItem(pointClient);
 
+                    mainForm.Println($"Klient {socketClient.RemoteEndPoint} przerwał połączenie: {ex.Message}");
+                    socketClient.Close();
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    mainForm.Println($"Błąd: {ex.Message}");
                 }
             }
+        }
+
+        static void SendMessage(object sender, EventArgs e)
+        {
+            string message = mainForm.GetMessageString();
+            if (message == "")
+            {
+                return;
+            }
+            byte[] sendBytes = Encoding.UTF8.GetBytes($"Serwer: {message}");
+            foreach (Socket s in clientSockets.Values)
+            {
+                s.Send(sendBytes);
+            }
+            mainForm.Println(message);
+            mainForm.ClearMessageText();
         }
     }
 }

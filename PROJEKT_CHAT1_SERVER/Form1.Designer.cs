@@ -55,6 +55,7 @@
             this.textAdresIP.Name = "textAdresIP";
             this.textAdresIP.Size = new System.Drawing.Size(120, 20);
             this.textAdresIP.TabIndex = 1;
+            this.textAdresIP.Text = "127.0.0.1";
             // 
             // label3
             // 

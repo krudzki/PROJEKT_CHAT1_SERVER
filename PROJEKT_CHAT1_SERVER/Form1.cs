@@ -49,14 +49,14 @@ namespace PROJEKT_CHAT1_SERVER
         
         public void Println(string str)
         {
-            if (this.textMessage.InvokeRequired)
+            if (this.textLog.InvokeRequired)
             {
                 VoidString println = Println;
-                this.textMessage.Invoke(println, str);
+                this.textLog.Invoke(println, str);
             }
             else
             {
-                this.textMessage.AppendText(str + Environment.NewLine);
+                this.textLog.AppendText(str + Environment.NewLine);
             }
         }
 
@@ -65,7 +65,7 @@ namespace PROJEKT_CHAT1_SERVER
             if (this.listBoxUsers.InvokeRequired)
             {
                 VoidString listAddItem = UsersListAddItem;
-                this.textMessage.Invoke(listAddItem, str);
+                this.textLog.Invoke(listAddItem, str);
             }
             else
             {
@@ -78,7 +78,7 @@ namespace PROJEKT_CHAT1_SERVER
             if (this.listBoxUsers.InvokeRequired)
             {
                 VoidString listRemoveItem = UserListRemoveItem;
-                this.textMessage.Invoke(listRemoveItem, str);
+                this.textLog.Invoke(listRemoveItem, str);
             }
             else
             {
