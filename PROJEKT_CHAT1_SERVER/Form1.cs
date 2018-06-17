@@ -19,6 +19,8 @@ namespace PROJEKT_CHAT1_SERVER
             this.buttonSend.Click += buttonSendClick;
         }
 
+        public Form1() { }
+
         private void Form1_Load(object sender, EventArgs e)
         {
 

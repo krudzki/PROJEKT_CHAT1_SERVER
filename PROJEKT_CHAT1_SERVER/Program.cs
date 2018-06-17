@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PROJEKT_CHAT1_SERVER.Logs;
 
 namespace PROJEKT_CHAT1_SERVER
 {
@@ -19,6 +20,7 @@ namespace PROJEKT_CHAT1_SERVER
         static Dictionary<string, Socket> clientSockets = null;
 
         static Form1 mainForm = null;
+        static SaveLogs saveLogs = new SaveLogs();
 
         /// <summary>
         /// Główny punkt wejścia dla aplikacji.
@@ -48,7 +50,8 @@ namespace PROJEKT_CHAT1_SERVER
             {
                 socketServer.Bind(iPEndPoint);
                 socketServer.Listen(100);
-                mainForm.Println($"Połączono {iPEndPoint}");
+                saveLogs.WriteLine("----------------------------");
+                PrintlnAndSave($"Włączono serwer pod adresem: {iPEndPoint}");
 
                 Thread thread = new Thread(Listen);
                 thread.IsBackground = true;
@@ -72,7 +75,7 @@ namespace PROJEKT_CHAT1_SERVER
 
                     // Pozyskiwanie adresu IP
                     string pointClient = socketClient.RemoteEndPoint.ToString();
-                    mainForm.Println($"{pointClient} Klient na połączeniu żadania");
+                    mainForm.Println($"{pointClient} klient połączony");
 
                     clientSockets.Add(pointClient, socketClient);
                     mainForm.UsersListAddItem(pointClient);
@@ -148,5 +151,13 @@ namespace PROJEKT_CHAT1_SERVER
             mainForm.Println(message);
             mainForm.ClearMessageText();
         }
+
+        static void PrintlnAndSave(string str)
+        {
+            mainForm.Println(str);
+            saveLogs.WriteLine(str);
+        }
+
+        
     }
 }

@@ -105,7 +105,7 @@
             this.buttonSend.Name = "buttonSend";
             this.buttonSend.Size = new System.Drawing.Size(92, 43);
             this.buttonSend.TabIndex = 9;
-            this.buttonSend.Text = "Wyślij";
+            this.buttonSend.Text = "Wyślij wszystkim";
             this.buttonSend.UseVisualStyleBackColor = true;
             // 
             // numericPort
