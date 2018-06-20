@@ -53,9 +53,9 @@
             // 
             // textAdresIP
             // 
-            this.textAdresIP.Location = new System.Drawing.Point(0, 20);
+            this.textAdresIP.Location = new System.Drawing.Point(7, 20);
             this.textAdresIP.Name = "textAdresIP";
-            this.textAdresIP.Size = new System.Drawing.Size(120, 20);
+            this.textAdresIP.Size = new System.Drawing.Size(107, 20);
             this.textAdresIP.TabIndex = 1;
             this.textAdresIP.Text = "127.0.0.1";
             // 
@@ -112,7 +112,7 @@
             // 
             // numericPort
             // 
-            this.numericPort.Location = new System.Drawing.Point(0, 64);
+            this.numericPort.Location = new System.Drawing.Point(7, 63);
             this.numericPort.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -124,7 +124,7 @@
             0,
             0});
             this.numericPort.Name = "numericPort";
-            this.numericPort.Size = new System.Drawing.Size(120, 20);
+            this.numericPort.Size = new System.Drawing.Size(107, 20);
             this.numericPort.TabIndex = 10;
             this.numericPort.Value = new decimal(new int[] {
             5000,
@@ -145,6 +145,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Khaki;
             this.ClientSize = new System.Drawing.Size(807, 377);
             this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.numericPort);
