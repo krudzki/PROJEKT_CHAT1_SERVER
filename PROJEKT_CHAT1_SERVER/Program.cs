@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PROJEKT_CHAT1_SERVER.Logs;
+using PROJEKT_CHAT1_SERVER.Cryptography;
 
 namespace PROJEKT_CHAT1_SERVER
 {
@@ -21,7 +22,7 @@ namespace PROJEKT_CHAT1_SERVER
 
         static Form1 mainForm = null;
         static SaveLogs saveLogs = new SaveLogs();
-
+        
         /// <summary>
         /// Główny punkt wejścia dla aplikacji.
         /// </summary>
@@ -32,12 +33,13 @@ namespace PROJEKT_CHAT1_SERVER
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            mainForm = new Form1(buttonStartClick, buttonSendClieck);
+            mainForm = new Form1(buttonStartClick, buttonSendClieck, buttonStopClick);
             Application.Run(mainForm);
         }
 
         static EventHandler buttonStartClick = Listenning;
         static EventHandler buttonSendClieck = SendMessage;
+        static EventHandler buttonStopClick = StopWork;
 
         static void Listenning(object sender, EventArgs e)
         {
@@ -52,6 +54,8 @@ namespace PROJEKT_CHAT1_SERVER
                 socketServer.Listen(100);
                 saveLogs.WriteLine("----------------------------");
                 PrintlnAndSave($"Włączono serwer pod adresem: {iPEndPoint}");
+                mainForm.SetStartEnabled(false);
+                mainForm.SetStopEnabled(true);
 
                 Thread thread = new Thread(Listen);
                 thread.IsBackground = true;
@@ -59,7 +63,22 @@ namespace PROJEKT_CHAT1_SERVER
             }
             catch (Exception ex)
             {
-                mainForm.Println($"Błąd: {ex.Message}");
+                PrintlnAndSave($"Błąd: {ex.Message}");
+            }
+        }
+
+        static void StopWork(object sender, EventArgs e)
+        {
+            try
+            {
+                socketServer.Close();
+                mainForm.SetStartEnabled(true);
+                mainForm.SetStopEnabled(false);
+                PrintlnAndSave($"Serwer wyłączono");
+            }
+            catch (Exception ex)
+            {
+                PrintlnAndSave($"Błąd: {ex.Message}");
             }
         }
 
@@ -75,7 +94,7 @@ namespace PROJEKT_CHAT1_SERVER
 
                     // Pozyskiwanie adresu IP
                     string pointClient = socketClient.RemoteEndPoint.ToString();
-                    mainForm.Println($"{pointClient} klient połączony");
+                    PrintlnAndSave($"{pointClient} klient połączony");
 
                     clientSockets.Add(pointClient, socketClient);
                     mainForm.UsersListAddItem(pointClient);
@@ -87,7 +106,7 @@ namespace PROJEKT_CHAT1_SERVER
                 }
                 catch (Exception ex)
                 {
-                    mainForm.Println($"Błąd: {ex.Message}");
+                    PrintlnAndSave($"Błąd: {ex.Message}");
                     break;
                 }
             }
@@ -112,7 +131,7 @@ namespace PROJEKT_CHAT1_SERVER
                     }
 
                     string str = Encoding.UTF8.GetString(buffor, 0, len);
-                    mainForm.Println($"{pointClient}: {str}");
+                    PrintlnAndSave($"{pointClient}: {str}");
 
                     foreach (Socket s in clientSockets.Values)
                     {
@@ -125,13 +144,13 @@ namespace PROJEKT_CHAT1_SERVER
                     clientSockets.Remove(pointClient);
                     mainForm.UserListRemoveItem(pointClient);
 
-                    mainForm.Println($"Klient {socketClient.RemoteEndPoint} przerwał połączenie: {ex.Message}");
+                    PrintlnAndSave($"Klient {socketClient.RemoteEndPoint} przerwał połączenie: {ex.Message}");
                     socketClient.Close();
                     break;
                 }
                 catch (Exception ex)
-                {
-                    mainForm.Println($"Błąd: {ex.Message}");
+                {                  
+                    PrintlnAndSave($"Błąd: {ex.Message}");
                 }
             }
         }
@@ -148,7 +167,7 @@ namespace PROJEKT_CHAT1_SERVER
             {
                 s.Send(sendBytes);
             }
-            mainForm.Println(message);
+            PrintlnAndSave($"Server: " + message);
             mainForm.ClearMessageText();
         }
 

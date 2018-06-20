@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.textAdresIP = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -37,6 +38,7 @@
             this.textMessage = new System.Windows.Forms.TextBox();
             this.buttonSend = new System.Windows.Forms.Button();
             this.numericPort = new System.Windows.Forms.NumericUpDown();
+            this.buttonStop = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericPort)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,7 +80,7 @@
             // listBoxUsers
             // 
             this.listBoxUsers.FormattingEnabled = true;
-            this.listBoxUsers.Location = new System.Drawing.Point(7, 129);
+            this.listBoxUsers.Location = new System.Drawing.Point(7, 179);
             this.listBoxUsers.Name = "listBoxUsers";
             this.listBoxUsers.Size = new System.Drawing.Size(100, 186);
             this.listBoxUsers.TabIndex = 6;
@@ -130,11 +132,21 @@
             0,
             0});
             // 
+            // buttonStop
+            // 
+            this.buttonStop.Location = new System.Drawing.Point(7, 129);
+            this.buttonStop.Name = "buttonStop";
+            this.buttonStop.Size = new System.Drawing.Size(100, 29);
+            this.buttonStop.TabIndex = 11;
+            this.buttonStop.Text = "Wyłącz serwer";
+            this.buttonStop.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(807, 377);
+            this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.numericPort);
             this.Controls.Add(this.buttonSend);
             this.Controls.Add(this.textMessage);
@@ -144,8 +156,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textAdresIP);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Server CHAT";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericPort)).EndInit();
             this.ResumeLayout(false);
@@ -164,6 +177,7 @@
         private System.Windows.Forms.TextBox textMessage;
         private System.Windows.Forms.Button buttonSend;
         private System.Windows.Forms.NumericUpDown numericPort;
+        private System.Windows.Forms.Button buttonStop;
     }
 }
 

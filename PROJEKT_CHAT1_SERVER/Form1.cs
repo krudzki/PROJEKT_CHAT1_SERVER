@@ -11,12 +11,13 @@ namespace PROJEKT_CHAT1_SERVER
 {
     public partial class Form1 : Form
     {
-        
-        public Form1(EventHandler buttonStartClick, EventHandler buttonSendClick)
+
+        public Form1(EventHandler buttonStartClick, EventHandler buttonSendClick, EventHandler buttonStopClick)
         {
             InitializeComponent();
             this.buttonStart.Click += buttonStartClick;
             this.buttonSend.Click += buttonSendClick;
+            this.buttonStop.Click += buttonStopClick;
         }
 
         public Form1() { }
@@ -47,8 +48,9 @@ namespace PROJEKT_CHAT1_SERVER
             this.textMessage.Clear();
         }
 
+
         delegate void VoidString(string str);
-        
+
         public void Println(string str)
         {
             if (this.textLog.InvokeRequired)
@@ -85,6 +87,34 @@ namespace PROJEKT_CHAT1_SERVER
             else
             {
                 this.listBoxUsers.Items.Remove(str);
+            }
+        }
+
+        delegate void VoidBool(bool bo);
+
+        public void SetStartEnabled(bool enabled)
+        {
+            if (this.buttonStart.InvokeRequired)
+            {
+                VoidBool sse = SetStartEnabled;
+                this.textLog.Invoke(sse, enabled);
+            }
+            else
+            {
+                this.buttonStart.Enabled = enabled;
+            }
+        }
+
+        public void SetStopEnabled(bool enabled)
+        {
+            if (this.buttonStop.InvokeRequired)
+            {
+                VoidBool sse = SetStopEnabled;
+                this.textLog.Invoke(sse, enabled);
+            }
+            else
+            {
+                this.buttonStop.Enabled = enabled;
             }
         }
     }
