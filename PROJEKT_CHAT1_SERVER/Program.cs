@@ -22,7 +22,8 @@ namespace PROJEKT_CHAT1_SERVER
 
         static Form1 mainForm = null;
         static SaveLogs saveLogs = new SaveLogs();
-        
+        static Crypto crypto = new Crypto();
+
         /// <summary>
         /// Główny punkt wejścia dla aplikacji.
         /// </summary>
@@ -130,12 +131,14 @@ namespace PROJEKT_CHAT1_SERVER
                         break;
                     }
 
-                    string str = Encoding.UTF8.GetString(buffor, 0, len);
+                    string encodedStr = Encoding.UTF8.GetString(buffor, 0, len);
+                    string str = crypto.Base64Decode(encodedStr);
+
                     PrintlnAndSave($"{pointClient}: {str}");
 
                     foreach (Socket s in clientSockets.Values)
                     {
-                        byte[] sendBytes = Encoding.UTF8.GetBytes($"{pointClient}: {str}");
+                        byte[] sendBytes = Encoding.UTF8.GetBytes(crypto.Base64Encode($"{pointClient}: {str}"));
                         s.Send(sendBytes);
                     }
                 }
@@ -162,7 +165,7 @@ namespace PROJEKT_CHAT1_SERVER
             {
                 return;
             }
-            byte[] sendBytes = Encoding.UTF8.GetBytes($"Serwer: {message}");
+            byte[] sendBytes = Encoding.UTF8.GetBytes(crypto.Base64Encode($"Serwer: {message}"));
             foreach (Socket s in clientSockets.Values)
             {
                 s.Send(sendBytes);

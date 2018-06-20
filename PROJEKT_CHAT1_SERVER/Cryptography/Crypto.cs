@@ -10,14 +10,16 @@ namespace PROJEKT_CHAT1_SERVER.Cryptography
     {
         public string Base64Encode(string strBeforeBase64)
         {
-            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(strBeforeBase64);
-            return System.Convert.ToBase64String(plainTextBytes);
+            var data = Encoding.ASCII.GetBytes(strBeforeBase64);
+            var base64 = Convert.ToBase64String(data);
+            return base64;
         }
 
         public string Base64Decode(string encodedDataByBase)
         {
-            var base64EncodedBytes = System.Convert.FromBase64String(encodedDataByBase);
-            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+            var decoded = Convert.FromBase64String(encodedDataByBase);
+            var result = Encoding.ASCII.GetString(decoded);
+            return result;
         }
     }
 }
