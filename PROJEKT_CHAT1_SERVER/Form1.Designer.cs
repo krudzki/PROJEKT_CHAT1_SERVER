@@ -90,6 +90,7 @@
             this.textLog.Location = new System.Drawing.Point(126, 13);
             this.textLog.Multiline = true;
             this.textLog.Name = "textLog";
+            this.textLog.ReadOnly = true;
             this.textLog.Size = new System.Drawing.Size(669, 302);
             this.textLog.TabIndex = 7;
             // 
