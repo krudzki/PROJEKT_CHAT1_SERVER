@@ -96,6 +96,7 @@
             // textMessage
             // 
             this.textMessage.Location = new System.Drawing.Point(126, 322);
+            this.textMessage.MaxLength = 1024;
             this.textMessage.Multiline = true;
             this.textMessage.Name = "textMessage";
             this.textMessage.Size = new System.Drawing.Size(570, 43);

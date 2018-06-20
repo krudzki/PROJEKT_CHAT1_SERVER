@@ -122,7 +122,7 @@ namespace PROJEKT_CHAT1_SERVER
                 try
                 {
                     // Uzyskanie wysłanego kontenera wiaodmosci
-                    byte[] buffor = new byte[1024 * 1024 * 2];
+                    byte[] buffor = new byte[1024];
                     int len = socketClient.Receive(buffor);
 
                     // pomijanie bajtów pustych

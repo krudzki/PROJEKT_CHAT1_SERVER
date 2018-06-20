@@ -5,7 +5,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Text;
-using System.Windows.Forms;
 
 namespace PROJEKT_CHAT1_SERVER
 {
