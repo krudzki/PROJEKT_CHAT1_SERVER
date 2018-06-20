@@ -38,11 +38,11 @@ namespace PROJEKT_CHAT1_SERVER
             Application.Run(mainForm);
         }
 
-        static EventHandler buttonStartClick = Listenning;
+        static EventHandler buttonStartClick = StartServer;
         static EventHandler buttonSendClieck = SendMessage;
         static EventHandler buttonStopClick = StopWork;
 
-        static void Listenning(object sender, EventArgs e)
+        static void StartServer(object sender, EventArgs e)
         {
             addressIP = IPAddress.Parse(mainForm.GetIPString());
             iPEndPoint = new IPEndPoint(addressIP, mainForm.GetPortNumber());
